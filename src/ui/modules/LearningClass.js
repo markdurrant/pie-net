@@ -26,8 +26,8 @@ class LearningClass {
 		this.button = new Button(this.element.querySelector('a.button--record'));
 		this.button.element.addEventListener('mousedown', this.buttonDown.bind(this));
 
-		this.button.element.addEventListener('touchstart', this.buttonDown.bind(this));
-		this.button.element.addEventListener('touchend', this.buttonUp.bind(this));
+		// this.button.element.addEventListener('touchstart', this.buttonDown.bind(this));
+		// this.button.element.addEventListener('touchend', this.buttonUp.bind(this));
 
 		this.resetLink = this.element.querySelector('.link--reset');
 		// this.button.element.addEventListener('mouseup', this.buttonUp.bind(this));
@@ -155,17 +155,22 @@ class LearningClass {
 		this.button.setText('Training');
 		this.section.startRecording(this.index);
 
-		this.buttonUpEvent = this.buttonUp.bind(this);
-		window.addEventListener('mouseup', this.buttonUpEvent);
+		// this.buttonUpEvent = this.buttonUp.bind(this);
+		// window.addEventListener('mouseup', this.buttonUpEvent);
 
 		GLOBALS.recording = true;
 		GLOBALS.classId = this.id;
 
-        GLOBALS.outputSection.toggleSoundOutput(false);
+    GLOBALS.outputSection.toggleSoundOutput(false);
 
 		setTimeout(() => {
-			GLOBALS.webcamClassifier.buttonDown(this.id, this.canvas, this);
+      GLOBALS.webcamClassifier.buttonDown(this.id, this.canvas, this);
 		}, 100);
+
+    // stop capture after 1.5 secs
+    setTimeout(() => {
+      this.buttonUp();
+    }, 1500);
 
 		gtag('event', 'training', {'id': this.index});
 	}
