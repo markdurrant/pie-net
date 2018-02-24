@@ -99,7 +99,7 @@ class OutputSection {
             this.currentOutput.start();
         }
 
-        gtag('event', 'select_output', {'id': outputId});
+        // gtag('event', 'select_output', {'id': outputId});
     }
 
     toggleSoundOutput(play) {

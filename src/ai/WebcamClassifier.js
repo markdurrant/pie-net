@@ -87,12 +87,6 @@ class WebcamClassifier {
       this.classExampleCount.push(0);
     }
 
-    this.activateWebcamButton = document.getElementById('input__media__activate');
-    if (this.activateWebcamButton) {
-      this.activateWebcamButton.addEventListener('click', () => {
-        location.reload();
-      });
-    }
   }
 
   deleteClassData(index) {
@@ -131,7 +125,7 @@ class WebcamClassifier {
           GLOBALS.audioContext.createMediaStreamSource(stream);
           GLOBALS.stream = stream;
         }
-        this.activateWebcamButton.style.display = 'none';
+
         this.active = true;
         this.stream = stream;
         this.video.addEventListener('loadedmetadata', this.videoLoaded.bind(this));
@@ -175,7 +169,7 @@ class WebcamClassifier {
             error: error
           }
         });
-        this.activateWebcamButton.style.display = 'block';
+
         window.dispatchEvent(event);
         gtag('event', 'webcam_denied');
       });

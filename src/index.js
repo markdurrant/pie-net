@@ -20,10 +20,7 @@ import IntroSection from './ui/modules/IntroSection.js';
 import InputSection from './ui/modules/InputSection.js';
 import LearningSection from './ui/modules/LearningSection.js';
 import OutputSection from './ui/modules/OutputSection.js';
-import Wizard from './ui/modules/Wizard.js';
-import Recording from './ui/modules/Recording';
 import RecordOpener from './ui/components/RecordOpener.js';
-import LaunchScreen from './ui/modules/wizard/LaunchScreen.js';
 import BrowserUtils from './ui/components/BrowserUtils';
 
 function init() {
@@ -32,21 +29,38 @@ function init() {
     if (typeof NodeList.prototype.forEach !== 'function') {
         NodeList.prototype.forEach = Array.prototype.forEach;
 	}
-    GLOBALS.browserUtils = new BrowserUtils();
-    GLOBALS.launchScreen = new LaunchScreen();
+  GLOBALS.browserUtils = new BrowserUtils();
 
-    GLOBALS.learningSection = new LearningSection(document.querySelector('#learning-section'));
+  GLOBALS.learningSection = new LearningSection(document.querySelector('#learning-section'));
 	GLOBALS.inputSection = new InputSection(document.querySelector('#input-section'));
 	GLOBALS.outputSection = new OutputSection(document.querySelector('#output-section'));
-    GLOBALS.recordOpener = new RecordOpener(document.querySelector('#record-open-section'));
 
 	GLOBALS.inputSection.ready();
 	GLOBALS.learningSection.ready();
-	GLOBALS.wizard = new Wizard();
-	GLOBALS.recordSection = new Recording(document.querySelector('#recording'));
 	if (localStorage.getItem('isBackFacingCam') && localStorage.getItem('isBackFacingCam') === 'true') {
 		GLOBALS.isBackFacingCam = true;
-	}
+  }
+  
+  // stuff stolen from wizzard
+  GLOBALS.camInput.start();
+  GLOBALS.inputSection.enable();
+  GLOBALS.inputSection.hideGif(0);
+  GLOBALS.inputSection.hideGif(1);
+  GLOBALS.inputSection.hideGif(2);
+  GLOBALS.inputSection.hideGif(3);
+  GLOBALS.inputSection.undim();
+  GLOBALS.learningSection.dehighlight();
+  GLOBALS.learningSection.dehighlightClass(0);
+  GLOBALS.learningSection.dehighlightClass(1);
+  GLOBALS.learningSection.dehighlightClass(2);
+  GLOBALS.learningSection.enable();
+  GLOBALS.learningSection.enableClass(0);
+  GLOBALS.learningSection.enableClass(1);
+  GLOBALS.learningSection.enableClass(2);
+  GLOBALS.learningSection.undim();
+  GLOBALS.outputSection.dehighlight();
+  GLOBALS.outputSection.enable();
+  GLOBALS.outputSection.undim();
 }
 
 window.addEventListener('load', init);

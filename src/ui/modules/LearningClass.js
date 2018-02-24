@@ -133,7 +133,6 @@ class LearningClass {
             // this.percentage = percentage;
             // this.updatePercentage();
             let that = this;
-            GLOBALS.recordSection.setMeters(this.id, percentage);
             TweenMax.to(this, 0.5, {
                 percentage: percentage,
                 onUpdate: () => {
